@@ -20,4 +20,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENV ASPNETCORE_URLS=http://+:2167;https://+:443
-ENTRYPOINT ["dotnet", "Naxxal.IconGenerator.Api.dll", "--urls", "http://+:2167"]
+ENTRYPOINT ["dotnet", "WebApi.dll", "--urls", "http://+:2167"]
