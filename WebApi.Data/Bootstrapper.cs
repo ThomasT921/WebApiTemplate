@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using Dapper;
 using Npgsql;
+using Serilog;
 using SimpleInjector;
 using WebApi.Common.Interfaces;
 
@@ -21,6 +22,7 @@ namespace WebApi.Data
                 var pgDb = Environment.GetEnvironmentVariable("PGDB");
 
                 var connectionString = $"Server={pgHost};Port={pgPort};Database={pgDb};User Id={pgUser};Password={pgPassword};";
+                Log.Information(connectionString);
                 var sqlConn = new NpgsqlConnection(connectionString);
                 sqlConn.Open();
                 return sqlConn;
