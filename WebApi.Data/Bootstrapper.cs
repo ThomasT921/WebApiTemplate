@@ -14,14 +14,15 @@ namespace WebApi.Data
             //Registers the sql connection
             container.Register(() =>
             {
-                var connString = Environment.GetEnvironmentVariable("DATABASE_URL");
+                var pgHost = Environment.GetEnvironmentVariable("PGHOST");
                 var pgPassword = Environment.GetEnvironmentVariable("PGPASSWORD");
                 var pgPort = Environment.GetEnvironmentVariable("PGPORT");
                 var pgUser = Environment.GetEnvironmentVariable("PGUSER");
                 var pgDb = Environment.GetEnvironmentVariable("PGDB");
 
-                var connectionString = $"Server={connString};Port={pgPort};Database={pgDb};User Id={pgUser};Password={pgPassword};";
+                var connectionString = $"Server={pgHost};Port={pgPort};Database={pgDb};User Id={pgUser};Password={pgPassword};";
                 var sqlConn = new NpgsqlConnection(connectionString);
+                sqlConn.Open();
                 return sqlConn;
             }, Lifestyle.Scoped);
 
